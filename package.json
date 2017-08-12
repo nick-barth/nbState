@@ -1,0 +1,25 @@
+{
+  "name": "nbstate",
+  "version": "1.0.0",
+  "description": "simple state management with todo",
+  "main": "./dist/js/index.js",
+  "scripts": {
+    "start": "npm run",
+    "clean": "rm -rf dist/js",
+    "build": "babel ./src -d ./dist/js"
+  },
+  "author": "Nick Barth",
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2015": "^6.16.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "babel-preset-stage-2": "^6.24.1",
+    "jquery": "^3.2.1"
+  }
+}
