@@ -94,11 +94,38 @@ state.init(initialState, handleStateChange.bind(undefined));
 * --
 */
 function handleStateChange() {
+
 	var currentState = state.getState();
 	var container = (0, _jquery2.default)('.todo__list');
 
-	currentState.todo.forEach(function (todo) {
-		container.append('<li class="todo__list-item">\n\t\t\t\t<div class="todo__list-item-text">\n\t\t\t\t\t' + todo.text + '\n\t\t\t\t</div>\n\t\t\t</li>');
+	(0, _jquery2.default)('.todo__list-item').remove();
+
+	// Appends items
+	currentState.todo.forEach(function (todo, index) {
+		container.append('<li class="todo__list-item">\n\t\t\t\t<div class="todo__list-item-text">\n\t\t\t\t\t' + todo.text + '\n\t\t\t\t</div>\n\t\t\t\t<div class="todo__list-item-done" data-id=\'' + index + '\'>\n\t\t\t\t\tDone!\n\t\t\t\t</div>\n\t\t\t</li>');
+	});
+
+	// Binds addition to form
+	(0, _jquery2.default)('.todo__list-item-done').each(function () {
+		(0, _jquery2.default)(this).on('click', function () {
+			handleDone.call(this, (0, _jquery2.default)(this).data('id'));
+		});
+	});
+}
+
+/*
+* Handles completion of a todo item
+* --
+*/
+function handleDone(id) {
+
+	var currentTodo = state.getState('todo');
+	var updates = currentTodo.filter(function (todo, index) {
+		return index !== id;
+	});
+
+	state.setState({
+		todo: updates
 	});
 }
 
@@ -107,19 +134,28 @@ function handleStateChange() {
 * --
 */
 function handleAdd() {
+
 	var currentState = state.getState();
 	var newTodo = {
-		urgency: 0,
-		text: (0, _jquery2.default)('#todo-input').val()
+		urgency: 0, // todo: add urgency colours
+		text: (0, _jquery2.default)('#todo-input').val(),
+		completed: false // line-strike instead of removal
 	};
 
 	currentState.todo.push(newTodo);
+
 	state.setState({
 		todo: currentState.todo
 	});
+
+	(0, _jquery2.default)('#todo-input').val('');
 }
 
-(0, _jquery2.default)('#todo-submit').click(handleAdd.bind(undefined));
+// Binds addition to form
+(0, _jquery2.default)('#todo__form').submit(function (ev) {
+	ev.preventDefault();
+	handleAdd.call(undefined);
+});
 
 /***/ }),
 /* 1 */
@@ -157,15 +193,16 @@ var nbState = function () {
 		}
 
 		/*
-   * Returns the state
+   * Returns the state via path or the entire state
    * --
+   * @return {String} - optional path of state element
    * @return {object} - State
    */
 
 	}, {
 		key: "getState",
-		value: function getState() {
-			return this.state;
+		value: function getState(path) {
+			return path ? this.state[path] : this.state;
 		}
 
 		/*

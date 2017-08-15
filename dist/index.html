@@ -7,22 +7,17 @@
     <body>
 		<div class="todo">
 			<div class="todo__box>">
-				<div class="todo__title">
+				<h1 class="todo__title">
 					Todo List
-				</div>
+				</h1>
 				<ul class="todo__list">
-					<li class="todo__list-item">
-						<div class="todo__list-item-text">
-							Eat the Poo Poo
-						</div>
-					</li>
 				</ul>
 			</div>
-			<div class="todo__input">
-				<input id="todo-input" type="text" name="todo">
-				<Button id="todo-submit">
-					Add
-				</Button>
+			<div class="todo__input-container">
+				<form id="todo__form" autocomplete="off">
+					<input class="todo__input" id="todo-input" type="textarea" name="todo" autofocus>
+					<span class="bar"></span>
+				</form>
 			</div>
 		</div>
 

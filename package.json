@@ -3,11 +3,6 @@
   "version": "1.0.0",
   "description": "simple state management with todo",
   "main": "./dist/js/index.js",
-  "scripts": {
-    "start": "npm run",
-    "clean": "rm -rf dist/js",
-    "build": "babel ./src -d ./dist/js"
-  },
   "author": "Nick Barth",
   "devDependencies": {
     "babel-cli": "^6.16.0",

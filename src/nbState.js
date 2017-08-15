@@ -12,12 +12,13 @@ class nbState {
 	}
 
 	/*
-	 * Returns the state
+	 * Returns the state via path or the entire state
 	 * --
+	 * @return {String} - optional path of state element
 	 * @return {object} - State
 	 */
-	getState () {
-		return this.state;
+	getState (path) {
+		return path ? this.state[path] : this.state;
 	}
 
 	/*
