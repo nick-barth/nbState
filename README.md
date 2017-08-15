@@ -1,4 +1,5 @@
-nbState
+
+`Index.html` is in `dist/`
 
 # Installation
 
