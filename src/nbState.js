@@ -27,11 +27,13 @@ class nbState {
 	 * @param {Object} - State updates
 	 */
 	setState (updates) {
+		const prevState = this.state;
+
 		Object.keys(updates).forEach(update => {
 			this.state[update] = updates[update];
 		});
 
-		this.onStateChange ? this.onStateChange() : null;
+		this.onStateChange ? this.onStateChange(prevState, this.state) : null;
 	}
 
 }
